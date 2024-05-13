@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pedidos</title>
+
+        <style>
+            body{
+                font-family: monospace;
+                text-align: center;
+                margin: 0 auto;
+                padding: 30px;
+                background-color: rgb(230, 101, 101);
+            }
+
+            h1, h2{
+                text-align: center;
+            }
+
+            table{
+                border-collapse: collapse;
+                margin-top: 20px;
+                margin-left: auto; 
+                margin-right: auto; 
+            }
+
+            table, th, td{
+                border: 1px solid;
+                padding: 10px;
+            }
+            .gif-img {
+            display: block; 
+            margin: 20px auto; 
+            max-width: 100%;
+            height: auto; 
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Resumo do Pedido</h1>
+
+        <table>
+            <tr>
+                <th>----------- RESUMO DO PEDIDO -----------</th>
+            </tr>
+            <tr>
+                <td id="pedido-descricao"></td>
+            </tr>
+        </table>
+
+        <h2>Total do Pedido:</h2>
+        <p id="pedido-total">R$ ------</p>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                
+                const urlParams = new URLSearchParams(window.location.search);
+                const pedidoString = urlParams.get('pedido');
+
+                if(pedidoString){
+                   
+                    const pedidoJSON = JSON.parse(pedidoString);
+               
+                    const descricaPedidoElement = document.getElementById('pedido-descricao');
+                    descricaPedidoElement.innerHTML = pedidoJSON.descricao;
+
+                    const totalPedidoElement = document.getElementById('pedido-total');
+                    totalPedidoElement.textContent = 'Total do Pedido: R$ ' + pedidoJSON.total;
+                }
+            })
+        </script>
+        <img class="gif-img" src="imagens/entrega.gif" alt="Entrega GIF">
+    </body>
+</html>
